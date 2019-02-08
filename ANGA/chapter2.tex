@@ -20,7 +20,7 @@ Sei $F$ ein Körper und $R \subseteq F$ ein Ring.
     Ein \textbf{angeordnete abelsche Gruppe} ist eine abelsche Gruppe $(\Gamma, +)$ mit einer
     Totalordnung, die mit der Addition verträglich ist.
 
-    Eine \textbf{Bewertung} auf $F$ ist eine Abbildung
+    Eine \textbf{Bewertung} auf $F$ ist eine surjektive Abbildung
     $$ v: F \to \Gamma \cup \{\infty\}, $$
     wobei $\Gamma$ eine angeordnete abelsche Gruppe ist und folgendes gilt
     \begin{enumerate}[label=(\arabic*)]
@@ -110,7 +110,7 @@ Sei $F$ ein Körper und $R \subseteq F$ ein Ring.
 \end{theorem}
 \begin{proof}
     Wähle $k_0 > \max\{k_1, \ldots, k_n\} - \min\limits_{i,j}\{v_i(x_j)\}$.\\
-    \underline{Beh. 1:} $\forall i \forall i\ne j \exists b_{ij}$ mit $v_i(b_{ij}) > 0$ und $v_j(b_{ij}) < 0$.
+    \underline{Beh. 1:} $\forall i \forall j\ne i \exists b_{ij}$ mit $v_i(b_{ij}) > 0$ und $v_j(b_{ij}) < 0$.
 
     \underline{Bew.:} $\mathcal{O}_{v_i} \ne \mathcal{O}_{v_j} \stackrel{I.2.15}{\implies} \mathcal{O}_{v_i} \not \subseteq \mathcal{O}_{v_j}
     \land \mathcal{O}_{v_j} \not \subseteq \mathcal{O}_{v_i}$ 
@@ -120,8 +120,34 @@ Sei $F$ ein Körper und $R \subseteq F$ ein Ring.
     \end{align*}
     \underline{Beh. 2:} $\forall i \exists b_i: v_i(b_i) > k_0 \land v_j(b_i) < -k_0 \forall j \ne i$
 
-    \underline{Bew.:} Wähle für jedes $i$ ein $l_i > k_0 \land l_i > \max\limits_{j}|v_{j}(b_{i,j})|$ und setze
-    $$ b_i := \sum\limits_{j \ne i} b_{i,j}^{l_j}$$
+    \underline{Bew.:} Wähle $l > k_0 \land l > \max\limits_{j,j'}|v_{j'}(b_{ij})|$ und setze
+    $$ b_i := \sum\limits_{j \ne i} b_{ij}^{l^j}.$$
+    Für festes $k$ setze $$ r_j := v_k(b_{ij}^{l^j}) \text{ und } r_{j_0} := \min\limits_{j \ne i} r_j.$$
+    Dann ist $j_0$ eindeutig bestimmt, denn sei $j \ne j_0$ mit $r_j = r_{j_0}$. Dann gilt
+    \begin{align*}
+        r_j = r_{j_0} & \implies v_k(b_{ij}^{l^j}) = v_k(b_{ij_0}^{l^{j_0}})\\
+            & \iff \underbrace{l^j}_{\ne l^{j_0}}\underbrace{v_k(b_{ij})}_{\in \Z} = \underbrace{l^{j_0}}_{\ne l^j}\underbrace{v_k(b_{ij_0})}_{\in \Z} \\
+            & \implies v_k(b_{ij}) = v_k(b_{ij_0}) = 0\\
+            & \implies r_j = r_{j_0} \lightning \text{, denn}
+    \end{align*}
+    Ist $k = i$ so folgt für alle $j$:
+    $$ r_j = v_i(b_{ij}^{l^j}) \stackrel{\text{Beh. 1}}{>} 0. \lightning $$
+    Und ist $k \ne i$ so folgt
+    $$ r_{j_0} = r_j = \min_{j \ne i} r_j \leq r_k = v_k(b_{ik}^{l^k}) \stackrel{\text{Beh. 1}}{<} 0. \lightning$$
+
+    Also erhalten wir für $k=i$
+    \begin{align*}
+        v_i(b_i) &= v_i\left(\sum_{j \ne i} b_{ij}^{l^j}\right)\\
+            & \geq \min_{j \ne i} r_j = \min_{j \ne i} l^j \underbrace{v_j(b_{ij})}_{> 0} > k_0.
+    \end{align*}
+    Und für $k \ne i$
+    \begin{align*}
+        v_k(b_i) &= v_i\left(\sum_{j \ne i} b_{ij}^{l^j}\right)\\
+            & = v_i\left(b_{ij_0}^{l^{j_0}} + \sum_{j \ne i,j_0} b_{ij}^{l^j}\right)\\
+            & = \min \left\{r_{j_0}, v_i\left(\sum_{j \ne ij_0} b_{ij}^{l^j}\right)\right\}\\
+            & = r_{j_0} < k_0.
+    \end{align*}
+
     \underline{Beh. 3:} $ x = \sum\limits_{k=1}^n (1-b_k)^{-1}$ erfüllt die Behauptung
     \begin{align*}
         x - x_i &= x_i \left(\frac{1}{1-b_i} - 1\right) + \sum\limits_{k\ne i} x_k (1-b_k)^{-1}\\
