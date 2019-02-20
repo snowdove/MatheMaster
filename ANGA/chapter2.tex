@@ -96,7 +96,7 @@ Sei $F$ ein Körper und $R \subseteq F$ ein Ring.
 
 \begin{bemerkungnr}
     Man nennt eine Bewertung \textbf{diskret}, wenn $\mathcal{O}_v$ ein diskreter Bewertungsring ist, also 
-    $\Gamma_v \cong \Z$.
+    $\Gamma_v \cong \Z$ (siehe \cref{I2.18}).
 
     Eine diskrete Bewertung heißt \textbf{normiert}, wenn $\Gamma_v = \Z$, und ein $f \in F$ mit $v(f) = 1$ heißt
     ein \textbf{Primelement} von $v$.
@@ -110,52 +110,80 @@ Sei $F$ ein Körper und $R \subseteq F$ ein Ring.
 \end{theorem}
 \begin{proof}
     Wähle $k_0 > \max\{k_1, \ldots, k_n\} - \min\limits_{i,j}\{v_i(x_j)\}$.\\
-    \underline{Beh. 1:} $\forall i \forall j\ne i \exists b_{ij}$ mit $v_i(b_{ij}) > 0$ und $v_j(b_{ij}) < 0$.
+    \emph{O.E. $k_0 > 0$:}
 
-    \underline{Bew.:} $\mathcal{O}_{v_i} \ne \mathcal{O}_{v_j} \stackrel{I.2.15}{\implies} \mathcal{O}_{v_i} \not \subseteq \mathcal{O}_{v_j}
+    \emph{Beweis.}
+    \begin{align*}
+        & 0 \geq k_0 > \max\{k_1, \ldots, k_n\} - \min_{i,j} \{v_i(x_j)\}\\
+        \implies & \min_{i,j} \{v_i(x_j)\} > \max\{k_1, \ldots, k_n\}\\
+        \implies & v_i(x_j) > k_j \forall i,j\\
+        \implies & v_i(x_i) > k_i \forall i
+    \end{align*}
+    Damit wäre $x=0$ eine Lösung.\nl
+    \emph{Beh. 1:} $\forall i \forall j\ne i \exists b_{ij}$ mit $v_i(b_{ij}) > 0$ und $v_j(b_{ij}) < 0$.
+
+    \emph{Beweis.} $\mathcal{O}_{v_i} \ne \mathcal{O}_{v_j} \stackrel{I.2.15}{\implies} \mathcal{O}_{v_i} \not \subseteq \mathcal{O}_{v_j}
     \land \mathcal{O}_{v_j} \not \subseteq \mathcal{O}_{v_i}$ 
     \begin{align*}
         & \implies \text{es existiert } b \in \mathcal{O}_{v_i} \setminus \mathcal{O}_{v_j} \text{ und } b' \in \mathcal{O}_{v_j} \setminus \mathcal{O}_{v_i}\\
         & \implies v_i(\frac{b}{b'}) > 0 \land v_j(\frac{b}{b'}) < 0
     \end{align*}
-    \underline{Beh. 2:} $\forall i \exists b_i: v_i(b_i) > k_0 \land v_j(b_i) < -k_0 \forall j \ne i$
+    \emph{Beh. 2:} $\forall i \exists b_i \forall j \ne i: v_i(b_i) > k_0 \land v_j(b_i) < -k_0$
 
-    \underline{Bew.:} Wähle $l > k_0 \land l > \max\limits_{j,j'}|v_{j'}(b_{ij})|$ und setze
+    \emph{Beweis.} Wähle 
+    \begin{align}
+        & l> k_0 \text{ und}\label{*}\tag{$*$}\\
+        & l > \max\limits_{j,j'}|v_{j'}(b_{ij})|\label{**}\tag{$**$}
+    \end{align}
+    und setze
     $$ b_i := \sum\limits_{j \ne i} b_{ij}^{l^j}.$$
-    Für festes $k$ setze $$ r_j := v_k(b_{ij}^{l^j}) \text{ und } r_{j_0} := \min\limits_{j \ne i} r_j.$$
-    Dann ist $j_0$ eindeutig bestimmt, denn sei $j \ne j_0$ mit $r_j = r_{j_0}$. Dann gilt
-    \begin{align*}
-        r_j = r_{j_0} & \implies v_k(b_{ij}^{l^j}) = v_k(b_{ij_0}^{l^{j_0}})\\
-            & \iff \underbrace{l^j}_{\ne l^{j_0}}\underbrace{v_k(b_{ij})}_{\in \Z} = \underbrace{l^{j_0}}_{\ne l^j}\underbrace{v_k(b_{ij_0})}_{\in \Z} \\
-            & \implies v_k(b_{ij}) = v_k(b_{ij_0}) = 0\\
-            & \implies r_j = r_{j_0} \lightning \text{, denn}
-    \end{align*}
-    Ist $k = i$ so folgt für alle $j$:
-    $$ r_j = v_i(b_{ij}^{l^j}) \stackrel{\text{Beh. 1}}{>} 0. \lightning $$
-    Und ist $k \ne i$ so folgt
-    $$ r_{j_0} = r_j = \min_{j \ne i} r_j \leq r_k = v_k(b_{ik}^{l^k}) \stackrel{\text{Beh. 1}}{<} 0. \lightning$$
-
-    Also erhalten wir für $k=i$
+    Setze für festes $k$ $$ r_{j} := v_k(b_{ij}^{l^j}).$$
+    Dann gilt für $k=i$ 
     \begin{align*}
         v_i(b_i) &= v_i\left(\sum_{j \ne i} b_{ij}^{l^j}\right)\\
-            & \geq \min_{j \ne i} r_j = \min_{j \ne i} l^j \underbrace{v_j(b_{ij})}_{> 0} > k_0.
+            & \geq \min_{j \ne i} r_{j} = \min_{j \ne i} l^j \underbrace{v_i(b_{ij})}_{> 0} > k_0.
     \end{align*}
-    Und für $k \ne i$
+    Sei also $k \ne i$. Dann ist
+    $$ v_k(b_i) = v_k\left(\sum_{j \ne i} b_{ij}^{l^j}\right) = \min_{j \ne i} r_{j} =: r_{j_0}, $$
+    denn $r_{j_0} \ne v_k\left(\sum_{j \ne i,j_0} b_{ij}^{l^j}\right)$.
+    Dies gilt, da zunächst aus \labelcref{**}:
+    $$l^j > \max\limits_{j,j'}|v_{j'}(b_{ij})|^j \geq 0$$
+    folgt und damit gilt:
     \begin{align*}
-        v_k(b_i) &= v_i\left(\sum_{j \ne i} b_{ij}^{l^j}\right)\\
-            & = v_i\left(b_{ij_0}^{l^{j_0}} + \sum_{j \ne i,j_0} b_{ij}^{l^j}\right)\\
-            & = \min \left\{r_{j_0}, v_i\left(\sum_{j \ne ij_0} b_{ij}^{l^j}\right)\right\}\\
-            & = r_{j_0} < k_0.
+        r_j = r_{j_0} & \implies \underbrace{l^j}_{>0}\underbrace{v_k(b_{ij})}_{\in \Z} = v_k(b_{ij}^{l^j}) 
+            = v_k(b_{ij_0}^{l^{j_0}}) = \underbrace{l^{j_0}}_{>0}\underbrace{v_k(b_{ij_0})}_{\in \Z} \\
+            & \implies v_k(b_{ij}) = v_k(b_{ij_0}) = 0 \text{ oder } l^{j_0} = l^j\\
+            & \implies l^{j_0} = l^j \implies j_0 = j, \text{, denn}
+    \end{align*}
+    Ist $k = i$ so folgt für alle $j$:
+    $$ r_j = v_i(b_{ij}^{l^j}) \stackrel{\text{Beh. 1}}{>} 0. $$
+    Und ist $k \ne i$ so folgt
+    $$ r_{j_0} = r_j = \min_{j \ne i} r_j \leq r_k = v_k(b_{ik}^{l^k}) \stackrel{\text{Beh. 1}}{<} 0.$$
+    Also erhalten wir $r_j \ne 0$ für alle $j$.
+
+    Nun folgt die Behauptung aus \labelcref{*}:
+    \begin{align*}
+        v_k(b_i) & = r_{j_0} \leq  r_k = v_k(b_{ik}^{l^k}) = 
+            \underbrace{l^k}_{> k_0} \underbrace{v_k(b_{ik})}_{< 0}  \stackrel{\text{Beh. 1}}{<} -k_0.
     \end{align*}
 
-    \underline{Beh. 3:} $ x = \sum\limits_{k=1}^n (1-b_k)^{-1}$ erfüllt die Behauptung
+    \emph{Beh. 3:} $ x = \sum\limits_{k=1}^n x_k(1-b_k)^{-1}$ ist eine Lösung
+    
+    \emph{Beweis.}
     \begin{align*}
-        x - x_i &= x_i \left(\frac{1}{1-b_i} - 1\right) + \sum\limits_{k\ne i} x_k (1-b_k)^{-1}\\
-        v_i\left(\frac{b_i}{1-b_i}\right) &= v_i(b_i) > k_0 > k_i - v_i(x_i) \implies v_i\left(x_i\left(\frac{1}{1-b_i} - 1\right)\right) > k_i\\
-        v_i\left(\frac{1}{1-b_k}\right) &= - v_i(b_k) > k_0 > k_i - v_i(x_k) \implies v_i(x_k(1-b_k)^{-1}) > k_i\\
-        & \implies v_i(x-x_i) > k_i
+        x - x_i &= x_i(1-b_i)^{-1} + \sum\limits_{k \ne i} x_k(1-b_k)^{-1} - x_i \\
+            & = x_i \left(\frac{1}{1-b_i} - 1\right) + \sum\limits_{k\ne i} x_k (1-b_k)^{-1}\\
+        v_i\left(\frac{1}{1-b_i} - 1\right) & = v_i\left(\frac{b_i}{1-b_i}\right) = v_i(b_i) - v_i(1-b_i)\\
+            & > k_0 - v_i(1-b_i) > k_i - v_i(x_i) -v_i(1-b_i)\\
+            & = k_i - (v_i(x_i) + v_i(1-b_i)) = k_i - (v_i(x_i) + \min\{0, \underbrace{v_i(b_i)}_{>k_0>0}\})\\
+            & = k_i - v_i(x_i)\\
+        \implies & v_i\left(x_i \left(\frac{1}{1-b_i} - 1\right)\right) = v_i(x_i) + v_i\left(\left(\frac{1}{1-b_i} - 1\right)\right) \\
+            & \quad > v_i(x_i) + k_i - v_i(x_i) = k_i\\
+        v_i\left(\frac{1}{1-b_k}\right) & = -v_i(1-b_k) = -\min \{0, \underbrace{v_i(b_k)}_{<-k_0 < 0}\} = -v_i(b_k)\\
+            & > k_0 > k_i - v_i(x_k)\\
+            & \implies v_i\left(\frac{x_k}{1-b_k}\right) = v_i(x_k) + v_i\left(\frac{1}{1-b_k}\right) \\
+            & \quad > v_i(x_k) + k_i - v_i(x_k) = k_i.
     \end{align*}
-
 \end{proof}
 
 \begin{korollar}
@@ -168,7 +196,8 @@ Sei $F$ ein Körper und $R \subseteq F$ ein Ring.
     Wähle für jedes $i$ ein $x_i$ mit $v_i(x_i)=k_i$. 
     Nach 1.8 existiert ein $x \in F$ mit $$v_i(x-x_i) > k_i \forall i,$$
     woraus $$ v_i(x) = v_i(x_i) = k_i$$
-    folgt.
+    folgt, denn falls $v_i(x) = v_i(x_i)$ so folgt $v_i(x) = k_i$ und falls
+    $v_i(x) \ne v_i(x_i)$ so folgt $v_i(x) > v_i(x_i) \implies v_i(x-x_i) = k_i < v_i(x-x_i) \lightning$.
 \end{proof}
 
 \section{Fortsetzungen von Bewertungen}
@@ -187,13 +216,21 @@ Sei $E|F$ eine Körpererweiterung.
     $$ \stackrel{(1)}{\implies} x^{-1} \notin m_v \implies x \in \mathcal{O}_v$$
     \underline{$\supseteq$:} $x \in \mathcal{O}_v \implies x^{-1} \notin m_v \stackrel{(1)}{\implies} x^{-1} \notin m_w \lor x^{-1} \notin \mathcal{O}_v$
     $$ \implies x \in \mathcal{O}_w \lor x \in m_v \stackrel{(1)}{\subseteq} m_w \subseteq \mathcal{O}_w.$$ 
-    \underline{$(2) \implies (3)$:} $ w|_F = v$\\
+    \underline{$(2) \implies (3)$:} $ w|_F = v$, denn $v \mapsto \O_v$ ist eine Bijektion\\
     \underline{$(3) \implies (1)$:} $\checkmark$
 \end{proof}
 
 \begin{theorem}[Cheralley]
     Sei $\mathfrak{p} \in \Spec(R)$ und $R \subseteq F$ ein Ring. Dann gibt es einen Bewertungsring $\mathcal{O}$ von $F$ mit 
     maximalem Ideal $m$, das $$m \cap R = \mathfrak{p}$$ erfüllt und $R \subseteq \mathcal{O}$.
+
+    $$\begin{tikzcd}
+        & F \arrow[ddl, dash] \drar[dash] &\\
+        & & \O \arrow[dd, dash,  "\ideal"]\\
+        R \arrow[urr, dash, "\subseteq"] \arrow[dd, dash, "\ideal"]& &\\
+        && m\\
+        \mathfrak{p} \arrow[urr, dash, "\subseteq"]&&
+    \end{tikzcd}$$
 \end{theorem}
 \begin{proof}
     Sei 
@@ -201,10 +238,11 @@ Sei $E|F$ eine Körpererweiterung.
         \mathfrak{X}=\{(A,I) \mid R_\mathfrak{p} \subseteq A \subseteq F \text{ Ring, } \mathfrak{p}R_\mathfrak{p} \subseteq I \properideal A\}\\
         (A,I) \leq (A',I') : \iff A \subseteq A' \land I \subseteq I'.
     \end{align*}
+    $\mathfrak{X} \ne \emptyset$, da $(R_{\mathfrak{p}}, \mathfrak{p}R_\mathfrak{p}) \in \mathfrak{X}$.
     Nach dem Lemma von Zorn existiert ein maximales Element $(\mathcal{O}, m) \in \mathfrak{X}$.
     \begin{itemize}
         \item $m$ ist maximales Ideal von $\mathcal{O}$: $\checkmark$
-        \item $\mathcal{O}$ ist lokal: $(\mathcal{O}, m) \leq (\mathcal{O}_m,m\mathcal{O}_m) \checkmark$
+        \item $\mathcal{O}$ ist lokal: $(\mathcal{O}, m) \leq (\mathcal{O}_m,m\mathcal{O}_m) $\todo{nicht verstanden}
         \item $m \cap R = \mathfrak{p}$: $m \cap R_\mathfrak{p} = \mathfrak{p}R_\mathfrak{p}$
         $$ \implies m \cap R = \mathfrak{p}R_\mathfrak{p} \cap R = \mathfrak{p}.$$
         \item $\mathcal{O}$ ist ein Bewertungsring von $F$:

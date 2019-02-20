@@ -510,7 +510,7 @@ Sei $K$ ein Körper und $\K \supseteq K$ ein algebraisch abgeschlossener Körper
     (Beachte $n + \infty = \infty + n = \infty + \infty = \infty$)
 \end{definition}
 
-\begin{satz}
+\begin{satz}\label{I2.18}
     Ist $R$ ein diskreter Bewertungsring von $F$ mit maximalem Ideal $m = (\pi)$, so ist $v_\pi$ eine 
     diskrete Bewertung auf $F$ (mit $v_\pi(0) := \infty$).
     Umgekehrt, wenn $v$ eine diskrete Bewertung auf $F$, so ist
@@ -520,7 +520,19 @@ Sei $K$ ein Körper und $\K \supseteq K$ ein algebraisch abgeschlossener Körper
     das maximale Ideal von $\mathcal{O}_v$.
 \end{satz}
 \begin{proof}
-    \underline{$\mathcal{O}_v$ ist ein Ring:} $\checkmark$\\
+    \underline{$v_\pi$ ist diskrete Bewertung:} Offenbar gilt $v_\pi : F \to \Z \cup \{\infty\}$ mit $$v(x) = \infty \iff x = 0.$$\nl
+    Desweiteren gilt für alle $x,y \in F^\times$:
+    \begin{align*}
+        &u_{xy} \pi^{v_\pi(xy)} = x\cdot y = u_x \pi^{v_\pi(x)} \cdot u_y \pi^{v_\pi(y)} = u_xu_y \pi^{v_\pi(x) + v_\pi(y)}\\
+        & \implies v_\pi(xy) = v_\pi(x) + v_\pi(y).
+    \end{align*}
+    O.E. $v_\pi(x) \geq v_\pi(y)$
+    \begin{align*}
+        &u_{x+y} \pi^{v_\pi(x+y)} = x + y = u_x \pi^{v_\pi(x)} + u_y \pi^{v_\pi(y)} = \pi^{v_\pi(y)}\cdot\left(u_x \pi^{v_\pi(x) - v_\pi(y)} + u_y\right)\\ 
+        & \implies u_{x+y} \pi^{v_\pi(x+y) - v_\pi(y)} =  u_x \pi^{v_\pi(x) - v_\pi(y)} + u_y \in R\\
+        & \implies v_\pi(x+y) - v_\pi(y) \geq 0 \implies v_\pi(x+y) \geq v_\pi(y) = \min \{v_\pi(x), v_\pi(y)\}.
+    \end{align*}
+    \underline{$\mathcal{O}_v$ ist ein Ring:} $\checkmark$\nl
     \underline{$m_v$ ist Ideal von $\mathcal{O}_v$ und $\mathcal{O}_v^\times = \mathcal{O}_v\setminus m_v$:}
     $$ a \in \mathcal{O}_v \setminus m_v \iff v(a) = 0 \iff -v(a) = 0 \iff v(a^{-1}) = 0 \iff a^{-1} \in \mathcal{O}_v \setminus m_v $$
     \underline{$I \ideal \mathcal{O}_v \implies I=(a)$ für $a \in \mathcal{O}_v$ mit $v(a) = \min\{v(x) \mid x \in I\}$:}
@@ -787,7 +799,7 @@ Sei $q = p^k$ eine Primpotenz.
     \begin{enumerate}[label=(\alph*)]
         \item $A$ ist ein Hauptidealring
         \item $A^\times$ ist endlich
-        \item $A$ hat unendlich viele Primelemente \todo{nicht verstanden}
+        \item $A$ hat unendlich viele Primelemente
         \item Für jedes $0 \ne x \in A$ ist $\|x\|:= |\sfrac{A}{(x)}| < \infty$ \todo{nicht verstanden}
     \end{enumerate}
 \end{satz}
